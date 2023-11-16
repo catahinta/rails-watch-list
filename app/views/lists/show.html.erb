@@ -1,7 +1,10 @@
-<div class="container">
-  <h1><%= @list.name %></h1>
-  <%= link_to "Add a new bookmark", new_list_bookmark_path(@list), {class: "btn btn-primary"} %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= @list.image_url %>);">
+  <div class="container">
+    <h1><%= @list.name %></h1>
+  </div>
+</div>
 
+<div class="container">
   <div class="movie-cards">
     <% @list.bookmarks.each do |bookmark| %>
       <div class="card-movie">
@@ -13,11 +16,22 @@
               <i class="fa-solid fa-trash"></i>
             <% end %>
             <p><%= bookmark.movie.overview %></p>
-            <h2>Comment: <%= bookmark.comment %></h2>
+            <div class="d-flex">
+              <i class="fa-regular fa-comment"></i>
+              <h2 class="px-1"><%= bookmark.comment %></h2>
+            </div>
           </div>
-          <h2 class="card-movie-rating"><%= bookmark.movie.rating %></h2>
+          <h2 class="card-movie-rating">⭐<%= bookmark.movie.rating %>/10</h2>
         </div>
       </div>
+    <% end %>
+  </div>
+  <div class="my-3">
+    <h3>Add a new bookmark</h3>
+    <%= simple_form_for [@list, @bookmark] do |f| %>
+      <%= f.input :comment %>
+      <%= f.association :movie %>
+      <%= f.submit "Add bookmark", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

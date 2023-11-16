@@ -3,9 +3,11 @@ class ListsController < ApplicationController
 
   def index
     @lists = List.all
+    @list = List.new
   end
 
   def show
+    @bookmark = Bookmark.new
   end
 
   def new
@@ -17,7 +19,7 @@ class ListsController < ApplicationController
     if @list.save
       redirect_to list_path(@list)
     else
-      render :new, status: 422
+      render :index, status: 422
     end
   end
 
@@ -28,6 +30,6 @@ class ListsController < ApplicationController
   end
 
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name, :image_url)
   end
 end

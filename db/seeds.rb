@@ -7,29 +7,38 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require "open-uri"
+require "json"
+
+Bookmark.destroy_all
+puts "Destroying bookmarks"
+
+List.destroy_all
+puts "Destroying lists"
 
 Movie.destroy_all
 puts "Destroying movies"
 
-require "open-uri"
-require "json"
+def get_movies(url)
+  movies_serialised = URI.open(url).read
+  movies = JSON.parse(movies_serialised)
 
-url = "https://tmdb.lewagon.com/movie/top_rated"
-movies_serialised = URI.open(url).read
-movies = JSON.parse(movies_serialised)
+  puts "Scraping api"
 
-puts "Scraping api"
-
-movies["results"].each do |movie|
-  title = movie["title"]
-  overview = movie["overview"]
-  rating = movie["vote_average"]
-  poster_url = "https://image.tmdb.org/t/p/w500#{movie["poster_path"]}"
-  Movie.create(
-    title: title,
-    overview: overview,
-    rating: rating,
-    poster_url: poster_url
-  )
-  puts "Movie created!"
+  movies["results"].each do |movie|
+    title = movie["title"]
+    overview = movie["overview"]
+    rating = movie["vote_average"]
+    poster_url = "https://image.tmdb.org/t/p/w500#{movie["poster_path"]}"
+    Movie.create(
+      title: title,
+      overview: overview,
+      rating: rating,
+      poster_url: poster_url
+    )
+    puts "Movie created!"
+  end
 end
+
+get_movies("https://tmdb.lewagon.com/movie/top_rated")
+get_movies("https://tmdb.lewagon.com/movie/popular")
