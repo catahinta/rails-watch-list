@@ -27,11 +27,11 @@
     <% end %>
   </div>
   <div class="my-3">
-    <h3>Add a new bookmark</h3>
+    <h3>Add a new movie</h3>
     <%= simple_form_for [@list, @bookmark] do |f| %>
       <%= f.input :comment %>
       <%= f.association :movie %>
-      <%= f.submit "Add bookmark", class: "btn btn-primary" %>
+      <%= f.submit "Add movie", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

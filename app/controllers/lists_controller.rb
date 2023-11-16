@@ -19,7 +19,7 @@ class ListsController < ApplicationController
     if @list.save
       redirect_to list_path(@list)
     else
-      render :index, status: 422
+      render :new, status: 422
     end
   end
 
