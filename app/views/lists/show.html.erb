@@ -11,17 +11,19 @@
         <img src=<%= bookmark.movie.poster_url %> />
         <div class="card-movie-infos">
           <div>
-            <h2><%= bookmark.movie.title %></h2>
-            <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-              <i class="fa-solid fa-trash"></i>
-            <% end %>
+            <div class="d-flex">
+              <h2><%= bookmark.movie.title %></h2>
+              <h2 class="card-movie-rating">⭐<%= bookmark.movie.rating %>/10</h2>
+            </div>
             <p><%= bookmark.movie.overview %></p>
             <div class="d-flex">
               <i class="fa-regular fa-comment"></i>
               <h2 class="px-1"><%= bookmark.comment %></h2>
             </div>
           </div>
-          <h2 class="card-movie-rating">⭐<%= bookmark.movie.rating %>/10</h2>
+          <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+            <i class="fa-solid fa-trash text-dark"></i>
+          <% end %>
         </div>
       </div>
     <% end %>
