@@ -13,7 +13,7 @@
   <div class ="cards my-3">
     <% @lists.each do |list| %>
       <%= link_to list_path(list), {style: "text-decoration:none"} do %>
-        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= list.image_url %>)">
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path list.photo.key %>)">
         <%= list.name %>
         </div>
       <% end %>
@@ -32,7 +32,7 @@
       <div class="modal-body">
         <%= simple_form_for @list do |f| %>
           <%= f.input :name %>
-          <%= f.input :image_url %>
+          <%= f.input :photo, as: :file %>
           <%= f.submit "Add new list", class: "btn btn-primary" %>
         <% end %>
       </div>

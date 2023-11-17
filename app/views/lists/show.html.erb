@@ -1,4 +1,4 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= @list.image_url %>);">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path @list.photo.key %>);">
   <div class="container">
     <h1><%= @list.name %></h1>
   </div>
@@ -10,19 +10,21 @@
       <div class="card-movie">
         <img src=<%= bookmark.movie.poster_url %> />
         <div class="card-movie-infos">
-          <div>
-            <div class="d-flex">
+          <div class ="card-movie-infos-inner">
+            <div class="d-flex justify-content-between">
               <h2><%= bookmark.movie.title %></h2>
-              <h2 class="card-movie-rating mx-1">•⭐<%= bookmark.movie.rating %>/10</h2>
+              <h2 class="card-movie-rating mx-1">⭐<%= bookmark.movie.rating %>/10</h2>
             </div>
             <p><%= bookmark.movie.overview %></p>
-            <div class="d-flex">
-              <i class="fa-regular fa-comment"></i>
-              <h2 class="px-1"><%= bookmark.comment %></h2>
-            </div>
+          </div>
+        </div>
+        <div class="comment-box">
+          <div class="d-flex">
+            <i class="fa-regular fa-comment"></i>
+            <h2 class="px-1"><%= bookmark.comment %></h2>
           </div>
           <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-            <i class="fa-solid fa-trash text-dark"></i>
+          <i class="fa-solid fa-trash text-dark"></i>
           <% end %>
         </div>
       </div>
