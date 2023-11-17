@@ -1,8 +1,16 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path @list.photo.key %>);">
-  <div class="container">
-    <h1><%= @list.name %></h1>
+<% if @list.photo.attached? %>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path @list.photo.key %>);">
+    <div class="container">
+      <h1><%= @list.name %></h1>
+    </div>
   </div>
-</div>
+<% else %>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path "list_background.jpg" %>);">
+    <div class="container">
+      <h1><%= @list.name %></h1>
+    </div>
+  </div>
+<% end %>
 
 <div class="container">
   <div class="movie-cards">
